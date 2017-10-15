@@ -46,8 +46,7 @@ void place_PC(void)
     //Picks a random room & a random spot in the room
     //Places the PC in that random position in the dungeon
     int room = (rand() % NUM_ROOMS);
-    printf("room: %d\n", room);
-
+    
     int room_rows = rooms[room][0];
     int room_cols = rooms[room][1];
     int room_start_row = rooms[room][2];

@@ -35,7 +35,6 @@ int main(int argc, char* argv[])
       //usleep(DELAY);
       //x++;
    }
-
    
    endwin();
    return 0;
