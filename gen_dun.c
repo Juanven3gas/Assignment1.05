@@ -12,6 +12,7 @@ void palce_PC(void);
 int get_pc_x_position(void);
 int get_pc_y_position(void);
 void init_hardness(void);
+void place_stairs(void);
 
 void placeMonsters(monster_t *arr, int size)
 {
@@ -184,6 +185,7 @@ int gen_dun(void)
     add_corridors();
     init_hardness();
     place_PC();
+    place_stairs();
     return 0;
 }
 
@@ -433,6 +435,44 @@ void init_dungeon(void)
 
         dungeon[i][0] = '|';
         dungeon[i][DUNGEON_COLUMNS - 1] = '|';
+    }
+}
+
+void place_stairs(void)
+{
+    srand(time(NULL));
+    
+    int num_stairs = (rand() % NUM_ROOMS) + 1;
+    int i;
+
+    for(i = 0; i < num_stairs; i++)
+    {
+        int room = (rand() % NUM_ROOMS);
+        
+        int room_rows = rooms[room][0];
+        int room_cols = rooms[room][1];
+        int room_start_row = rooms[room][2];
+        int room_start_col = rooms[room][3];
+    
+        int temp1 = (room_start_row + room_rows) -1;
+        int temp2 = (room_start_col + room_cols) -1;
+        
+        int temp3 = room_start_row - temp1;
+        int temp4 = room_start_col - temp2;
+    
+        int stair_x = (rand() % temp3) + room_start_row;
+        int stair_y = (rand() % temp4) + room_start_col;
+        
+        if(dungeon[stair_x][stair_y] == '.')
+        {
+            if(rand() % 2 == 0)
+            {
+                dungeon[stair_x][stair_y] = '>';
+            }
+            else{
+                dungeon[stair_x][stair_y] = '<';
+            }
+        }
     }
 }
 

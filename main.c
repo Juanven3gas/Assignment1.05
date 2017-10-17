@@ -55,8 +55,8 @@ int main(int argc, char* argv[])
    WINDOW *win;
    initscr();
    noecho();
-   curs_set(FALSE);
-   win = newwin(END_Y, END_X, 0, 0);
+   //curs_set(FALSE);
+   win = newwin(END_Y, END_X, 1, 0);
    
    
    while(1)
@@ -64,6 +64,7 @@ int main(int argc, char* argv[])
       wclear(win);
       print_dungeon(win);
       int ch = getch();
+      //wprintw(win, "%c\n", ch);
       if(ch == 'Q' || ch == 'q')
       {
          break;
@@ -112,6 +113,31 @@ int main(int argc, char* argv[])
       {
          //Don't move the character but move the monsters
       }
+      else if(ch == '<')
+      {
+          if(lastPosition == '<')
+          {
+              wclear(win);
+              gen_dun();
+              createMonsters(monsters, num_monsters);
+              placeMonsters(monsters, num_monsters);
+              lastPosition = '.';
+              print_dungeon(win);
+          }
+      }
+      else if(ch == '>')
+      {
+          if(lastPosition == '>')
+          {
+            wclear(win);
+            gen_dun();
+            createMonsters(monsters, num_monsters);
+            placeMonsters(monsters, num_monsters);
+            lastPosition = '.';
+            print_dungeon(win);
+          }
+      }
+
       //sleep(1);
       //clear the screen
       //wclear(win);
@@ -145,7 +171,8 @@ void move_PC(int whichDir)
          pc_y_position = pc_y_position - 1;
       }
 
-   }else if(whichDir == 8)
+   }
+   else if(whichDir == 8)
    {
       
       if(dungeon[pc_x_position-1][pc_y_position] != ' ')
@@ -157,7 +184,8 @@ void move_PC(int whichDir)
          pc_x_position = pc_x_position - 1;
       }
 
-   }else if(whichDir == 9)
+   }
+   else if(whichDir == 9)
    {
       
       if(dungeon[pc_x_position-1][pc_y_position+1] != ' ')
@@ -169,7 +197,8 @@ void move_PC(int whichDir)
          pc_x_position = pc_x_position - 1;
          pc_y_position = pc_y_position + 1;
       }
-   }else if (whichDir == 6)
+   }
+   else if (whichDir == 6)
    {
       
       if(dungeon[pc_x_position][pc_y_position+1] != ' ')
@@ -180,7 +209,8 @@ void move_PC(int whichDir)
          dungeon[pc_x_position][pc_y_position + 1] = '@';
          pc_y_position = pc_y_position + 1;
       }
-   }else if(whichDir == 3)
+   }
+   else if(whichDir == 3)
    {
       
       if(dungeon[pc_x_position+1][pc_y_position+1] != ' ')
@@ -192,7 +222,8 @@ void move_PC(int whichDir)
          pc_x_position = pc_x_position + 1;
          pc_y_position = pc_y_position + 1;
       }
-   }else if(whichDir == 2)
+   }
+   else if(whichDir == 2)
    {
       
       if(dungeon[pc_x_position+1][pc_y_position] != ' ')
@@ -203,7 +234,8 @@ void move_PC(int whichDir)
          dungeon[pc_x_position + 1][pc_y_position] = '@';
          pc_x_position = pc_x_position + 1;
       }
-   }else if(whichDir == 1)
+   }
+   else if(whichDir == 1)
    {
       
       if(dungeon[pc_x_position+1][pc_y_position-1] != ' ')
@@ -215,7 +247,8 @@ void move_PC(int whichDir)
          pc_x_position = pc_x_position + 1;
          pc_y_position = pc_y_position - 1;
       }
-   }else if(whichDir == 4)
+   }
+   else if(whichDir == 4)
    {
       
       if(dungeon[pc_x_position][pc_y_position-1] != ' ')
