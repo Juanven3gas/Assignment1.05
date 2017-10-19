@@ -8,5 +8,5 @@ int distances_non_tunn[21][80];
 int distances_tunn[21][80];
 
 int calc_distances(void);
-
+char intToChar(int i);
 #endif

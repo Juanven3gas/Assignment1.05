@@ -25,6 +25,15 @@ int queue_delete(queue_t *q)
   return 0;
 }
 
+int queue_empty(queue_t *q)
+{
+  monster_t m;
+  while (!queue_remove(q, &m))
+  ;
+
+  return 0;
+}
+
 int queue_add(queue_t *q, monster_t m, int priority)
 {
   //If the queue is not empty

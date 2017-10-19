@@ -27,6 +27,7 @@ typedef struct queue {
 
 int queue_init(queue_t *q);
 int queue_delete(queue_t *q);
+int queue_empty(queue_t *q);
 //int queue_add(queue_t *q, int v, int priority);
 //int queue_remove(queue_t *q, int *v);
 //int queue_peek(queue_t *q, int *v);
